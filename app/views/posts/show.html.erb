@@ -1,18 +1,52 @@
-<!-- Show.html.erb -->
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
 
-<h1><%= @post.title %></h1>
-<p><%= @post.content %></p>
+<p>
+  <strong>Description:</strong>
+  <%= @post.description %>
+</p>
 
 <% if @post.image.present? %>
-  <%= image_tag @post.image.url ,width: "30%" %>
+  <p>
+    <strong>Image:</strong>
+    <%= image_tag @post.image.url, width: "500px", height: "300px" %>
+  </p>
 <% end %>
 
 <% if @post.video.present? %>
-  <video controls>
-    <source src="/videos/<%= @post.video %>" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <p>
+    <strong>Video:</strong>
+    <%= video_tag @post.video.url %>
+  </p>
 <% end %>
 
+<%= button_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure you want to log out?' } %> | |
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
+<style>
+/* CSS for a wallpaper background */
+
+/* Set the background image */
+body {
+  background-image: url('https://jooinn.com/images/pale-yellow-background-1.jpg'); /* Replace 'your-wallpaper-image.jpg' with the actual path to your wallpaper image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Optional: Keeps the background fixed while scrolling */
+  margin: 0; /* Remove default margin */
+  padding: 20px; /* Add some padding to separate content from the background */
+  font-family: Arial, sans-serif; /* Choose a suitable font */
+  color: #333; /* Set the text color */
+}
+
+/* Styles for the post content */
+.container {
+  max-width: 800px; /* Adjust the maximum width as needed */
+  margin: 0 auto; /* Center-align the content horizontally */
+  background-color: rgba(255, 255, 255, 0.9); /* Background color with opacity */
+  padding: 20px; /* Add padding to the content container */
+  border-radius: 10px; /* Rounded corners */
+}
+</style>

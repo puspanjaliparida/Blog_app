@@ -1,107 +1,49 @@
-<h1>Welcome to My Blog App</h1>
-<h2>These are all my Posts!</h2>
-<%= button_to 'Logout', destroy_user_session_path, method: :delete, form: {turbolink: false} %>
-<!-- User Avatar Rendering -->
-<% @posts.each do |post| %>
-  <div class="post">
-    <div class="default-avatar">
-      <% if @post && @post.user && @post.user.avatar.present? %>
-        <%= image_tag @post.user.avatar, class: "avatar" %>
-      <% else %>  
-        <div class="default-avatar">
-          <img src="https://www.pngkey.com/png/full/115-1150152_default-profile-picture-avatar-png-green.png" alt="default-avatar" class="default-avatar">
-        </div>
-    </div>
-  </div>
-      <% end %>
-    <% if post.image.present? %>
-      <img src="<%= post.image.url %>" alt="<%= post.title %>" class="post-image">
-    <% end %>
+<style>
+  .round-image {
+    border-radius: 50%;
+  }
 
-    <div class="post-content">
-      <h2><%= post.title %></h2>
-      <p><%= post.content %></p>
-
-      <% if post.video.present? %>
-        <video controls class="post-video">
-          <source src="/videos/<%= post.video %>" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      <% end %>
-    </div>
- 
-    <div class="new-post-link">
-      <%= link_to 'Create a New Post', new_post_path %> |
-      <%= link_to 'VIEW POST', post_path(post) %>
-      <p>Posted on: <%= post.created_at.strftime("%B %e, %Y at %l:%M %p") %></p>
-      <%= form_for(post, :html => { :method => :delete, :remote => true, data: { confirm: "Are you sure?"} }) do |f| %>
-      <%= f.submit :value => "Delete" %>
-      <% end %>
-    </div>
-  <% end %>
-
-  <style>
-  /* Apply background image to the body */
   body {
-    background-image: url('https://wallpaperaccess.com/full/1353673.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  /* Center-align headings */
-  h1, h2 {
-    text-align: center;
-    margin: 0; /* Remove default margin for cleaner appearance */
-    padding: 20px 0; /* Add some vertical spacing */
-  }
+  padding: 10px;
+  background: url('https://cdn.wallpapersafari.com/13/92/UpsMNY.jpg') center/cover; /* Replace 'path/to/your/image.jpg' with the actual path to your wallpaper image */
+  align-items: center;
+  background-attachment: fixed; /* Optional: Keeps the background fixed while scrolling */
+}
+/* Style the container for the buttons */
+.button-container {
+  background-color: #fff; /* Background color for the container */
+  border: 1px solid #ddd; /* Border for the container */
+  padding: 10px; /* Padding inside the container */
+  border-radius: 5px; /* Rounded corners */
+  display: inline-block; /* Make it an inline block to fit the content */
+}
 
-  /* Style for user name */
-  .user-name {
-    text-align: center;
-    margin-top: 10px;
-    font-weight: bold;
-  }
+/* Style the individual buttons */
+.button-container a {
+  text-decoration: none; /* Remove underlines from links */
+  color: #333; /* Text color for the links */
+  margin-right: 10px; /* Margin between buttons (adjust as needed) */
+}
 
-  /* Your existing styles */
-  .post {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 5px;
-  }
-
-  .post-content {
-    flex: 1;
-    margin-left: 5px;
-    font-size: 25px;
-  }
-
-  .post-image {
-    max-width: 28%;
-    height: auto;
-    margin-top: 5px;
-  }
-
-  .post-video {
-    width: 28%;
-    height: auto;
-    margin-top: 10px;
-  }
-
-  .avatar {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-
-  .default-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
-  }
 </style>
+
+<h1>Posts</h1>
+
+<%= link_to 'Create New Post', new_post_path %>
+
+<% @posts.each do |post| %>
+  <h2><%= link_to post.title, post %></h2>
+  <% if post.image? %>
+      <%= image_tag post.image.url , width: "20%"%>
+    <% end %>
+    <% if post.video? %>
+      <video width="320" height="240" controls>
+        <source src="<%= post.video.url %>" type="video/mp4">
+      </video>
+    <% end %>
+    <% if post.user && post.user.avatar.present? %>
+     <p>Posted by <%= image_tag post.user.avatar.url, width: "3%", class: "round-image" %> <%= post.user.email %> on <%= post.created_at.strftime("%B %d, %Y") %></p>
+    <% else %>
+     <p>Posted by Puspanjali Parida on <%= post.created_at.strftime("%B %d, %Y") %></p>
+    <% end %>
+<% end %>

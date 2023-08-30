@@ -1,11 +1,52 @@
+<!DOCTYPE html>
+<html>
 <head>
-  <title>BlogApp</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= javascript_importmap_tags %>
+  <title>Your Blog App</title>
+  <!-- ... Your stylesheet links and other meta tags ... -->
 </head>
 <body>
-  <%= yield %>
+
+<div class="button-container">
+  <%= link_to "Home", root_path %>
+  <% if user_signed_in? %>
+    <% if current_user.avatar? %>
+      <%= image_tag current_user.avatar.url, width: "3%", class: "round-image" %>
+    <% end %>
+    <%= current_user.name %>
+    <%= button_to 'Log out', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure you want to log out?' } %>
+  <% else %>
+    <%= link_to "Login", new_user_session_path %>
+    <%= link_to "Sign Up", new_user_registration_path %>
+  <% end %>
+</div>
+
+<%= yield %>
+
 </body>
 
+</html>
+<style>
+/* Your CSS styles */
+
+.button-container {
+  background-color: #f0f0f0; /* Background color for the container */
+  border: 1px solid #ccc; /* Border for the container */
+  padding: 30px; /* Padding inside the container */
+  border-radius: 20px; /* Rounded corners */
+  display: inline-block; /* Make it an inline block to fit the content */
+}
+
+.button-container a {
+  text-decoration: none; /* Remove underlines from links */
+  color: #333; /* Text color for the links */
+  margin: 0 10px; /* Margin between buttons (horizontal) */
+}
+
+/* Style for the "Log out" button */
+.button-container form {
+  display: inline; /* Display the form inline with the links */
+  margin-left: 10px; /* Margin between the "Log out" button and other links */
+}
+
+/* Rest of your CSS styles */
+</style>
