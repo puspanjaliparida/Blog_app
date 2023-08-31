@@ -1,112 +1,56 @@
-<h2>Log in</h2>
+<div class="container">
+  <h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "current-password" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Log in" %>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>
 <style>
 /* CSS for centering the content and adding a background image */
 
-/* Set the background image */
 body {
-  background-image: url('https://tse1.mm.bing.net/th?id=OIP.0aL7xb6ML9C4X6a6S_jYqgHaEK&pid=Api&P=0&h=180'); /* Replace with your image URL */
+  background-image: url('https://wallpapertag.com/wallpaper/full/f/5/8/275011-amazing-yellow-background-1920x1080.jpg'); /* Replace 'your-wallpaper-image.jpg' with the actual path to your wallpaper image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed; /* Optional: Keeps the background fixed while scrolling */
-}
-
-/* Center the login form vertically and horizontally */
-body, html {
-  height: 100%;
-  margin: 0;
-}
-
-.container {
+  margin: 0; /* Remove default margin */
+  padding: 20px; /* Add some padding to separate content from the background */
+  font-family: Arial, sans-serif; /* Choose a suitable font */
+  color: #333; /* Set the text color */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  min-height: 100vh; /* Ensure at least full viewport height */
 }
 
-/* Style the login form */
-h2 {
-  text-align: center;
-  color: #333; /* Change text color to dark gray */
+/* Style for the form container */
+.container {
+  background-color: rgba(255, 255, 255, 0.9); /* Background color with opacity */
+  padding: 20px; /* Add padding to the form container */
+  border-radius: 10px; /* Rounded corners */
+  max-width: 400px; /* Adjust the maximum width as needed */
+  text-align: center; /* Center-align content within the form */
 }
-
-.field {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.actions {
-  text-align: center;
-}
-
-/* Additional styles for form elements (you can customize further) */
-.field label {
-  font-weight: bold;
-  color: #555; /* Change label text color */
-}
-
-.field input[type="text"],
-.field input[type="password"] {
-  width: 10%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
-
-.field input[type="checkbox"] {
-  margin-right: 5px;
-}
-
-/* Style the submit button */
-.actions input[type="submit"] {
-  background-color: #007BFF; /* Blue background color */
-  color: #fff; /* White text color */
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* Hover effect for the submit button */
-.actions input[type="submit"]:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-}
-
-/* Style links in the shared links section */
-.links a {
-  text-decoration: none;
-  color: #007BFF; /* Blue link color */
-}
-
-.links a:hover {
-  text-decoration: underline;
-}
-
 </style>

@@ -1,11 +1,11 @@
 <p>
-  <strong>Title:</strong>
-  <%= @post.title %>
+  <strong style="font-size: 35px;">Title:</strong>
+  <input type="text" style="font-size: 30px; width: 30%;" value="<%= @post.title %>" name="post[title]">
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @post.description %>
+  <strong style="font-size: 35px;">Description:</strong>
+  <textarea style="font-size: 25px; width: 100%;" rows="30"><%= @post.description %></textarea>
 </p>
 
 <% if @post.image.present? %>
